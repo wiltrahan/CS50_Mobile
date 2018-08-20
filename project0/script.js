@@ -34,7 +34,6 @@ function createAndAddToView(listItem, listItemId) {
     li.className = classNames.TODO_ITEM;
 
     list.appendChild(li);
-
     addToListArrayAndIncrementCount(listItem, checkbox.id);
 };
 
@@ -45,9 +44,8 @@ function createDeleteButton() {
         deleteButton.value = "delete";
         deleteButton.className = classNames.TODO_DELETE;
         deleteButton.addEventListener('click', function() {
-            deleteFromList(this.id);
             this.parentNode.remove(this);
-            console.log(arrayOfTodos);
+            deleteFromList(this.id);
         });
     return deleteButton;
 }
@@ -75,11 +73,15 @@ function addToListArrayAndIncrementCount(listItem, id) {
     arrayOfTodos.push(todoObject);
     itemCountSpan.innerText = arrayOfTodos.length;
     uncheckedItemCount();
-
 };
 
 function deleteFromList(id) {
-    arrayOfTodos.splice(id, 1);
+    for (var i =0; i < arrayOfTodos.length; i++)
+        if (arrayOfTodos[i].id === id) {
+            arrayOfTodos.splice(i,1);
+   }
+    itemCountSpan.innerText = arrayOfTodos.length;
+    uncheckedItemCount();
 }
 
 function uncheckedItemCount() {
