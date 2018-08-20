@@ -11,6 +11,16 @@ const uncheckedCountSpan = document.getElementById('unchecked-count')
 const userTodo = document.getElementById('user-todo');
 
 function newTodo() {
-  itemCountSpan.innerHTML++;
-  alert(userTodo.value);
+  if(userTodo.value.length === 0) {
+    alert("Please add something TODO!");
+  } else {
+    addToListAndIncrement(userTodo.value);
+  }
+}
+
+function addToListAndIncrement(listItem) {
+  const li = document.createElement("li");
+  li.appendChild(document.createTextNode(listItem));
+  list.appendChild(li);
+  itemCountSpan.innerText++;
 }
