@@ -10,17 +10,48 @@ const itemCountSpan = document.getElementById('item-count')
 const uncheckedCountSpan = document.getElementById('unchecked-count')
 const userTodo = document.getElementById('user-todo');
 
+const arrayOfTodos = [];
+let listItemId = 0;
+
 function newTodo() {
   if(userTodo.value.length === 0) {
     alert("Please add something TODO!");
   } else {
-    addToListAndIncrement(userTodo.value);
+    listItemId++;
+    addToList(userTodo.value, listItemId);
   }
 }
 
-function addToListAndIncrement(listItem) {
+function addToList(listItem, listItemId) {
   const li = document.createElement("li");
+  const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.id = listItemId - 1;
+        checkbox.addEventListener('change', function() {
+            if(this.checked) {
+                onCheckMarkDecrementCount();
+            }
+        });
+  li.appendChild(checkbox);
   li.appendChild(document.createTextNode(listItem));
   list.appendChild(li);
-  itemCountSpan.innerText++;
+
+  addToListArrayAndIncrementCount(listItem, checkbox.id);
+}
+
+function addToListArrayAndIncrementCount(listItem, id) {
+  const todoObject = {};
+  todoObject["todo"] = listItem;
+  todoObject["id"] = id;
+
+  arrayOfTodos.push(todoObject);
+  itemCountSpan.innerText = arrayOfTodos.length;
+  uncheckedCountSpan.innerText = arrayOfTodos.length;
+  console.log(arrayOfTodos);
+
+
+}
+
+function onCheckMarkDecrementCount() {
+    uncheckedCountSpan.innerText--;
 }
