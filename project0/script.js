@@ -37,19 +37,6 @@ function createAndAddToView(listItem, listItemId) {
     addToListArrayAndIncrementCount(listItem, checkbox.id);
 };
 
-function createDeleteButton() {
-    const deleteButton = document.createElement("input");
-        deleteButton.type = "button";
-        deleteButton.id = listItemId - 1;
-        deleteButton.value = "delete";
-        deleteButton.className = classNames.TODO_DELETE;
-        deleteButton.addEventListener('click', function() {
-            this.parentNode.remove(this);
-            deleteFromList(this.id);
-        });
-    return deleteButton;
-}
-
 function createCheckbox() {
     const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
@@ -64,6 +51,19 @@ function createCheckbox() {
         });
     return checkbox;
 };
+
+function createDeleteButton() {
+    const deleteButton = document.createElement("input");
+        deleteButton.type = "button";
+        deleteButton.id = listItemId - 1;
+        deleteButton.value = "delete";
+        deleteButton.className = classNames.TODO_DELETE;
+        deleteButton.addEventListener('click', function() {
+            this.parentNode.remove(this);
+            deleteFromList(this.id);
+        });
+    return deleteButton;
+}
 
 function addToListArrayAndIncrementCount(listItem, id) {
     const todoObject = {};
